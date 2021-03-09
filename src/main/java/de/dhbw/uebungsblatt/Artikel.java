@@ -7,7 +7,7 @@ public class Artikel {
 	public Artikel(){
 	
 	}
-	//@Autowired
+
 	public Artikel(Long artikelNr, String bezeichnung, Float einzelpreis){
 		this.artikelNr = artikelNr;
 		this.bezeichnung = bezeichnung;
