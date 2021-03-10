@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.stream.*;
 
 @RestController
-@RequestMapping("/Artikel")
+@RequestMapping("/artikel")
 public class ArtikelController {
 	
 	private ArtikelStorage Artikel;
@@ -18,8 +18,8 @@ public class ArtikelController {
 	}
 	
 	
-	@GetMapping(path ="{/artikelNr}")
-	public Artikel get(@PathVariable Long artikelNr ){
+	@GetMapping(path ="/{artikelNr}")
+	public Artikel get(@PathVariable String artikelNr ){
 		return Artikel.get(artikelNr);
 	}
 	
@@ -44,12 +44,12 @@ public class ArtikelController {
 	}
 	@PostMapping
 	public Artikel post(@RequestBody Artikel artikel) {
-		Artikel.put(artikel.artikelNr, artikel);
+		Artikel.put(Long.toString(artikel.artikelNr), artikel);
 		return artikel;
 	}
 	
-	@PutMapping(path ="{/artikelNr}")
-	public Artikel put(@PathVariable Long artikelNr, @RequestBody Artikel artikel){
+	@PutMapping(path ="/{artikelNr}")
+	public Artikel put(@PathVariable String artikelNr, @RequestBody Artikel artikel){
 		Artikel art = Artikel.get(artikelNr);
 		if (art != null) {
 			if (artikel.artikelNr != null)
@@ -61,13 +61,13 @@ public class ArtikelController {
 			return art;
 		}
 		else{
-			this.Artikel.put(artikel.artikelNr, artikel);
+			this.Artikel.put(Long.toString(artikel.artikelNr), artikel);
 			return artikel;
 		}
 	}
 	
-	@DeleteMapping(path ="{/artikelNr}")
-	public void delete(@PathVariable Long artikelNr){
+	@DeleteMapping(path ="/{artikelNr}")
+	public void delete(@PathVariable String artikelNr){
 		Artikel.remove(artikelNr);
 	}
 }

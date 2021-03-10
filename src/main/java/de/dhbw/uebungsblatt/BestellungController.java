@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.stream.*;
 
 @RestController
-@RequestMapping("/Bestellung")
+@RequestMapping("/bestellung")
 
 public class BestellungController {
 	private BestellungStorage Bestellung;
@@ -19,9 +19,9 @@ public class BestellungController {
 	}
 	
 	
-	@GetMapping(path ="{/bestellungsNr}")
-	public Bestellung get(@PathVariable Long bestellungsNr ){
-		return Bestellung.get(bestellungsNr);
+	@GetMapping(path ="/{id}")
+	public Bestellung get(@PathVariable String id ){
+		return Bestellung.get(id);
 	}
 	
 	@GetMapping
@@ -41,13 +41,13 @@ public class BestellungController {
 	}
 	@PostMapping
 	public Bestellung post(@RequestBody Bestellung bestellung) {
-		Bestellung.put(bestellung.bestellungsNr, bestellung);
+		Bestellung.put(Long.toString(bestellung.bestellungsNr), bestellung);
 		return bestellung;
 	}
 	
-	@PutMapping(path ="{/bestellungsNr}")
-	public Bestellung put(@PathVariable Long bestellungsNr, @RequestBody Bestellung bestellung){
-		Bestellung bes = Bestellung.get(bestellungsNr);
+	@PutMapping(path ="/{id}")
+	public Bestellung put(@PathVariable String id, @RequestBody Bestellung bestellung){
+		Bestellung bes = Bestellung.get(id);
 		if (bes != null) {
 			if (bestellung.bestellungsNr != null)
 				bes.bestellungsNr = bestellung.bestellungsNr;
@@ -56,13 +56,13 @@ public class BestellungController {
 			return bes;
 		}
 		else{
-			this.Bestellung.put(bestellung.bestellungsNr, bestellung);
+			this.Bestellung.put(Long.toString(bestellung.bestellungsNr), bestellung);
 			return bestellung;
 		}
 	}
 	
-	@DeleteMapping(path ="{/bestellungsNr}")
-	public void delete(@PathVariable Long bestellungsNr){
-		Bestellung.remove(bestellungsNr);
+	@DeleteMapping(path ="/{id}")
+	public void delete(@PathVariable String id){
+		Bestellung.remove(id);
 	}
 }

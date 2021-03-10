@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.stream.*;
 
 @RestController
-@RequestMapping("/Bestellposition")
+@RequestMapping("/bestellposition")
 public class BestellpositionController {
 	
 	private BestellpositionStorage Bestellpositionen;
@@ -17,9 +17,9 @@ public class BestellpositionController {
 	}
 	
 	 
-	@GetMapping(path ="{/bestellposNr}")
-	public Bestellposition get(@PathVariable Long bestellposNr ){
-		return Bestellpositionen.get(bestellposNr);
+	@GetMapping(path ="/{id}")
+	public Bestellposition get(@PathVariable String id ){
+		return Bestellpositionen.get(id);
 	}
 	
 	@GetMapping
@@ -47,13 +47,13 @@ public class BestellpositionController {
 	}
 	@PostMapping
 	public Bestellposition post(@RequestBody Bestellposition bestellposition) {
-		Bestellpositionen.put(bestellposition.bestellposNr, bestellposition);
+		Bestellpositionen.put(Long.toString(bestellposition.bestellposNr), bestellposition);
 		return bestellposition;
 	}
 	
-	@PutMapping(path ="{/bestellposNr}")
-	public Bestellposition put(@PathVariable Long bestellposNr, @RequestBody Bestellposition bestellposition){
-		Bestellposition best = Bestellpositionen.get(bestellposNr);
+	@PutMapping(path ="/{id}")
+	public Bestellposition put(@PathVariable String id, @RequestBody Bestellposition bestellposition){
+		Bestellposition best = Bestellpositionen.get(id);
 		if (best != null) {
 			if (bestellposition.bestellposNr != null)
 				best.bestellposNr = bestellposition.bestellposNr;
@@ -66,13 +66,13 @@ public class BestellpositionController {
 			return best;
 		}
 		else{
-			this.Bestellpositionen.put(bestellposition.bestellposNr, bestellposition);
+			this.Bestellpositionen.put(Long.toString(bestellposition.bestellposNr), bestellposition);
 			return bestellposition;
 		}
 	}
 	
-	@DeleteMapping(path ="{/bestellposNr}")
-	public void delete(@PathVariable Long bestellposNr){
-		Bestellpositionen.remove(bestellposNr);
+	@DeleteMapping(path ="/{id}")
+	public void delete(@PathVariable String id){
+		Bestellpositionen.remove(id);
 	}
 }

@@ -18,7 +18,7 @@ public class KundeController {
 	}
 	
 	
-	@GetMapping(path ="{/id}")
+	@GetMapping(path ="/{id}")
 	public Kunde get(@PathVariable String id ){
 		return kunden.get(id);
 	}
@@ -65,7 +65,7 @@ public class KundeController {
 		return kunde;
 	}
 	
-	@PutMapping(path ="{/id}")
+	@PutMapping(path ="/{id}")
 	public Kunde put(@PathVariable String id, @RequestBody Kunde kunde){
 		Kunde kund = kunden.get(id);
 		if (kund != null) {
@@ -91,8 +91,8 @@ public class KundeController {
 		}
 	}
 	
-	@DeleteMapping(path ="{/id}")
-	public void delete(@PathVariable Long kundenNr){
-		kunden.remove(kundenNr);
+	@DeleteMapping(path ="/{id}")
+	public void delete(@PathVariable String id){
+		kunden.remove(id);
 	}
 }
