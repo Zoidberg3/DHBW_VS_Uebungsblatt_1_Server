@@ -44,7 +44,7 @@ public class ArtikelController {
 	}
 	@PostMapping
 	public Artikel post(@RequestBody Artikel artikel) {
-		Artikel.put(String.valueOf(artikel.artikelNr), artikel);
+		Artikel.put(artikel.artikelNr, artikel);
 		return artikel;
 	}
 	
@@ -61,7 +61,7 @@ public class ArtikelController {
 			return art;
 		}
 		else{
-			this.Artikel.put(String.valueOf(artikel.artikelNr), artikel);
+			this.Artikel.put(artikel.artikelNr, artikel);
 			return artikel;
 		}
 	}

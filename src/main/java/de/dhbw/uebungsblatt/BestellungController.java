@@ -41,7 +41,7 @@ public class BestellungController {
 	}
 	@PostMapping
 	public Bestellung post(@RequestBody Bestellung bestellung) {
-		Bestellung.put(String.valueOf(bestellung.bestellungsNr), bestellung);
+		Bestellung.put(bestellung.bestellungsNr, bestellung);
 		return bestellung;
 	}
 	
@@ -56,7 +56,7 @@ public class BestellungController {
 			return bes;
 		}
 		else{
-			this.Bestellung.put(String.valueOf(bestellung.bestellungsNr), bestellung);
+			this.Bestellung.put(bestellung.bestellungsNr, bestellung);
 			return bestellung;
 		}
 	}
