@@ -9,19 +9,18 @@ import java.util.stream.*;
 
 @RestController
 @RequestMapping("/kunde")
-
 public class KundeController {
+	
 	private KundeStorage kunden;
 	
-	@Autowired
-	KundeController(KundeStorage kundeStorage){
+	@Autowired KundeController(KundeStorage kundeStorage){
 		this.kunden = kundeStorage;
 	}
 	
 	
-	@GetMapping(path ="{/kundenNr}")
-	public Kunde get(@PathVariable Long kundenNr ){
-		return kunden.get(kundenNr);
+	@GetMapping(path ="{/id}")
+	public Kunde get(@PathVariable String id ){
+		return kunden.get(id);
 	}
 	
 	@GetMapping
@@ -62,13 +61,13 @@ public class KundeController {
 	}
 	@PostMapping
 	public Kunde post(@RequestBody Kunde kunde) {
-		kunden.put(kunde.kundenNr, kunde);
+		kunden.put(Long.toString(kunde.kundenNr), kunde);
 		return kunde;
 	}
 	
-	@PutMapping(path ="{/kundenNr}")
-	public Kunde put(@PathVariable Long kundenNr, @RequestBody Kunde kunde){
-		Kunde kund = kunden.get(kundenNr);
+	@PutMapping(path ="{/id}")
+	public Kunde put(@PathVariable String id, @RequestBody Kunde kunde){
+		Kunde kund = kunden.get(id);
 		if (kund != null) {
 			if (kunde.kundenNr != null)
 				kund.kundenNr = kunde.kundenNr;
@@ -87,12 +86,12 @@ public class KundeController {
 			return kund;
 		}
 		else{
-			this.kunden.put(kunde.kundenNr, kunde);
+			this.kunden.put(id, kunde);
 			return kunde;
 		}
 	}
 	
-	@DeleteMapping(path ="{/kundenNr}")
+	@DeleteMapping(path ="{/id}")
 	public void delete(@PathVariable Long kundenNr){
 		kunden.remove(kundenNr);
 	}
